@@ -1,6 +1,6 @@
 # Chapter Summarizer
 
-> **Educational branch:** This repository is a branch of the Calibre
+> **Educational fork:** This repository is a fork of the Calibre
 > **Chapter Summarizer** plugin, maintained here for educational and
 > experimentation purposes. It is not the official upstream distribution and
 > may diverge from it. For the original plugin, releases, and user support, see
