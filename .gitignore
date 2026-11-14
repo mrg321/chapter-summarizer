@@ -1,0 +1,5 @@
+/.env
+/.vscode
+/model-calls-report.md
+/model-calls.postman_collection.json
+/models-report.md
