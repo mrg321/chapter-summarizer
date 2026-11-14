@@ -11,6 +11,21 @@ import sys
 # Enable debug logging before any imports
 os.environ['CHAPTER_SUMMARIZER_DEBUG_ENABLED'] = '1'
 
+if os.environ.get('CHAPTER_SUMMARIZER_WAIT_FOR_DEBUGGER'):
+    from pathlib import Path
+
+    extension_root = Path.home() / '.vscode' / 'extensions'
+    debugpy_libs = sorted(extension_root.glob('ms-python.debugpy-*/bundled/libs'))
+    if not debugpy_libs:
+        raise RuntimeError(f'Could not find VS Code debugpy libraries under {extension_root}')
+    sys.path.insert(0, str(debugpy_libs[-1]))
+    import debugpy
+
+    print('DEBUGPY_STARTING: starting attach listener', flush=True)
+    debugpy.listen(('127.0.0.1', 5678), in_process_debug_adapter=True)
+    print('DEBUGPY_READY: attach VS Code debugger on 127.0.0.1:5678', flush=True)
+    debugpy.wait_for_client()
+
 # Ensure calibre is on sys.path (calibre-debug does this automatically)
 # If running via VS Code with calibre's python, this may not be needed.
 
